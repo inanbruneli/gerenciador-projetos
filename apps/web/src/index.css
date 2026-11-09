@@ -1,1 +1,86 @@
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Encode Sans Semi Expanded', ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #695ccd;
+  --color-primary-disabled: #b2a8ff;
+  --color-header: #1c1930;
+  --color-ink: #1c1930;
+  --color-page: #f4f2ff;
+  --color-title: #1f1283;
+  --color-text: #717171;
+  --color-line: #dcdcdc;
+  --color-error: #c40000;
+  --color-error-strong: #9f0000;
+}
+
+@layer base {
+  body {
+    @apply bg-page font-sans;
+  }
+
+  button,
+  a {
+    @apply cursor-pointer transition-opacity hover:opacity-80;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed hover:opacity-100;
+  }
+}
+
+header {
+  view-transition-name: header;
+}
+
+::view-transition-old(root) {
+  animation: 300ms ease both slide-out-left;
+}
+
+::view-transition-new(root) {
+  animation: 300ms ease both slide-in-right;
+}
+
+[data-navigation='back']::view-transition-old(root) {
+  animation-name: slide-out-right;
+}
+
+[data-navigation='back']::view-transition-new(root) {
+  animation-name: slide-in-left;
+}
+
+@keyframes slide-out-left {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-out-right {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
