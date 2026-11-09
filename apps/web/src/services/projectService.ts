@@ -9,6 +9,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     const error = await response.json().catch(() => null)
     throw new Error(error?.message ?? 'Tente novamente em alguns instantes')
   }
+  if (response.status === 204) return undefined as T
   return response.json()
 }
 
@@ -47,4 +48,8 @@ export function setFavorite(id: string, isFavorite: boolean) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ isFavorite }),
   })
+}
+
+export function deleteProject(id: string) {
+  return request<void>(`/projects/${id}`, { method: 'DELETE' })
 }

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import { useDismiss } from '../../hooks/useDismiss'
 import ChevronDownIcon from '../icons/ChevronDownIcon'
 
 export type SortOption = 'name' | 'startDate' | 'endDate'
@@ -19,23 +20,7 @@ export default function SortSelect({ value, onChange }: SortSelectProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const selected = OPTIONS.find(option => option.value === value)
 
-  useEffect(() => {
-    if (!isOpen) return
-
-    const handleClick = (event: MouseEvent) => {
-      if (!containerRef.current?.contains(event.target as Node)) setIsOpen(false)
-    }
-    const handleKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsOpen(false)
-    }
-
-    document.addEventListener('mousedown', handleClick)
-    document.addEventListener('keydown', handleKey)
-    return () => {
-      document.removeEventListener('mousedown', handleClick)
-      document.removeEventListener('keydown', handleKey)
-    }
-  }, [isOpen])
+  useDismiss(containerRef, isOpen, () => setIsOpen(false))
 
   const select = (option: SortOption) => {
     onChange(option)

@@ -1,11 +1,14 @@
+import { useState } from 'react'
 import type { Project } from '../../types/project'
 import { useToggleFavorite } from '../../hooks/useToggleFavorite'
+import { useDeleteProject } from '../../hooks/useDeleteProject'
 import { formatLongDate } from '../../utils/date'
 import StarIcon from '../icons/StarIcon'
-import DotsIcon from '../icons/DotsIcon'
 import ImagePlaceholderIcon from '../icons/ImagePlaceholderIcon'
 import CalendarStartIcon from '../icons/CalendarStartIcon'
 import CalendarEndIcon from '../icons/CalendarEndIcon'
+import ProjectMenu from './ProjectMenu'
+import DeleteProjectDialog from './DeleteProjectDialog'
 
 type ProjectCardProps = {
   project: Project
@@ -13,6 +16,8 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const toggleFavorite = useToggleFavorite()
+  const deleteProject = useDeleteProject()
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
 
   return <article className="overflow-hidden rounded-2xl transition-transform duration-200 motion-safe:hover:-translate-y-1">
     <div className="relative flex h-[232px] items-center justify-center bg-primary">
@@ -33,13 +38,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <StarIcon filled={project.isFavorite} />
         </button>
 
-        <button
-          type="button"
-          aria-label="Opções do projeto"
-          className="flex size-8 items-center justify-center rounded-full bg-white text-primary shadow-[0_2px_4px_rgba(0,0,0,0.25)]"
-        >
-          <DotsIcon />
-        </button>
+        <ProjectMenu onRemove={() => setIsDeleteOpen(true)} />
       </div>
     </div>
 
@@ -67,5 +66,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </dl>
     </div>
+
+    <DeleteProjectDialog
+      projectName={project.name}
+      isOpen={isDeleteOpen}
+      isPending={deleteProject.isPending}
+      onConfirm={() => deleteProject.mutate(project, { onSettled: () => setIsDeleteOpen(false) })}
+      onCancel={() => setIsDeleteOpen(false)}
+    />
   </article>
 }
