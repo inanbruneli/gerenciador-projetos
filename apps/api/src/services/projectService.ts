@@ -38,3 +38,7 @@ export const setFavorite = async (id: string, { isFavorite }: FavoriteInput) => 
   const project = await prisma.project.update({ where: { id }, data: { isFavorite } })
   return toResponse(project)
 }
+
+export const deleteProject = async (id: string) => {
+  await prisma.project.delete({ where: { id } })
+}

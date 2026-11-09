@@ -15,3 +15,8 @@ export const favorite: RequestHandler<{ id: string }> = async (req, res) => {
   const project = await projectService.setFavorite(req.params.id, req.body)
   res.json(project)
 }
+
+export const remove: RequestHandler<{ id: string }> = async (req, res) => {
+  await projectService.deleteProject(req.params.id)
+  res.status(204).end()
+}
