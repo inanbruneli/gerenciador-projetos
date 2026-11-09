@@ -16,13 +16,27 @@ export function listProjects() {
   return request<Project[]>('/projects')
 }
 
-export function createProject(values: ProjectFormValues) {
-  const body = new FormData()
-  body.append('name', values.name.trim())
-  body.append('client', values.client.trim())
-  body.append('startDate', values.startDate)
-  body.append('endDate', values.endDate)
-  if (values.coverImage) body.append('coverImage', values.coverImage)
+function readAsDataUrl(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result as string)
+    reader.onerror = () => reject(reader.error)
+    reader.readAsDataURL(file)
+  })
+}
 
-  return request<Project>('/projects', { method: 'POST', body })
+export async function createProject(values: ProjectFormValues) {
+  const body = {
+    name: values.name.trim(),
+    client: values.client.trim(),
+    startDate: values.startDate,
+    endDate: values.endDate,
+    coverImage: values.coverImage ? await readAsDataUrl(values.coverImage) : null,
+  }
+
+  return request<Project>('/projects', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
 }

@@ -16,13 +16,11 @@
     "@prisma/client": "^7.10.1",
     "cors": "^2.8.6",
     "express": "^5.3.0",
-    "multer": "^2.5.0",
     "yup": "^1.7.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-    "@types/multer": "^2.3.0",
     "@types/node": "^26.6.6",
     "prisma": "~7.10.1",
     "tsx": "^4.23.15",

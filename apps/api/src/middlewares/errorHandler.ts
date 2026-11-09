@@ -1,22 +1,14 @@
 import type { ErrorRequestHandler } from 'express'
-import { MulterError } from 'multer'
 import { ValidationError } from 'yup'
-import { InvalidFileTypeError } from './upload.js'
 
 export const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
   if (error instanceof ValidationError) {
-    res.status(400).json({ message: 'Dados inválidos', errors: error.errors })
+    res.status(400).json({ message: error.errors[0], errors: error.errors })
     return
   }
 
-  if (error instanceof InvalidFileTypeError) {
-    res.status(400).json({ message: error.message })
-    return
-  }
-
-  if (error instanceof MulterError) {
-    const message = error.code === 'LIMIT_FILE_SIZE' ? 'A capa deve ter no máximo 5MB' : error.message
-    res.status(400).json({ message })
+  if (error.type === 'entity.too.large') {
+    res.status(413).json({ message: 'A capa deve ter no máximo 5MB' })
     return
   }
 
