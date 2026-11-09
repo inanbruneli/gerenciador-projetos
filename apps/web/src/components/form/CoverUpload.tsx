@@ -4,16 +4,16 @@ import UploadIcon from '../icons/UploadIcon'
 
 type CoverUploadProps = {
   id: string
-  value: File | null
+  value: File | string | null
   onChange: (file: File | null) => void
 }
 
 export default function CoverUpload({ id, value, onChange }: CoverUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null)
-  const previewUrl = useMemo(() => value && URL.createObjectURL(value), [value])
+  const previewUrl = useMemo(() => value instanceof File ? URL.createObjectURL(value) : value, [value])
 
   useEffect(() => () => {
-    if (previewUrl) URL.revokeObjectURL(previewUrl)
+    if (previewUrl?.startsWith('blob:')) URL.revokeObjectURL(previewUrl)
   }, [previewUrl])
 
   const removeCover = () => {

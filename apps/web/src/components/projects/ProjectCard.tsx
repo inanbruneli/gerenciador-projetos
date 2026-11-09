@@ -38,7 +38,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <StarIcon filled={project.isFavorite} />
         </button>
 
-        <ProjectMenu onRemove={() => setIsDeleteOpen(true)} />
+        <ProjectMenu projectId={project.id} onRemove={() => setIsDeleteOpen(true)} />
       </div>
     </div>
 

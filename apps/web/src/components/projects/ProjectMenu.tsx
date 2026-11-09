@@ -3,14 +3,16 @@ import { useDismiss } from '../../hooks/useDismiss'
 import DotsIcon from '../icons/DotsIcon'
 import EditIcon from '../icons/EditIcon'
 import TrashIcon from '../icons/TrashIcon'
+import TransitionLink from '../TransitionLink'
 
 type ProjectMenuProps = {
+  projectId: string
   onRemove: () => void
 }
 
 const itemClassName = 'flex h-[53px] w-full items-center gap-[15px] px-[21px] text-base text-primary hover:bg-page hover:opacity-100'
 
-export default function ProjectMenu({ onRemove }: ProjectMenuProps) {
+export default function ProjectMenu({ projectId, onRemove }: ProjectMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -37,10 +39,10 @@ export default function ProjectMenu({ onRemove }: ProjectMenuProps) {
       <div role="menu" className="absolute top-full right-0 z-20 mt-2 w-60 rounded bg-white shadow-[0_4px_8px_rgba(0,0,0,0.25)]">
         <span className="absolute -top-1.5 right-[11px] size-3 rotate-45 bg-white" />
 
-        <button type="button" role="menuitem" disabled className={itemClassName}>
+        <TransitionLink to={`/project/${projectId}/edit`} role="menuitem" className={itemClassName}>
           <span className="flex w-[22px] justify-center"><EditIcon /></span>
           Editar
-        </button>
+        </TransitionLink>
 
         <div className="mx-[21px] h-px bg-page" />
 

@@ -27,11 +27,11 @@ export const projectFormSchema = yup.object({
     .test('after-start', 'Não pode ser anterior à data de início', (value, context) =>
       !isValidDate(context.parent.startDate) || value >= context.parent.startDate),
   coverImage: yup
-    .mixed<File>()
+    .mixed<File | string>()
     .nullable()
     .default(null)
-    .test('cover-type', 'Escolha uma imagem .jpg ou .png', file => !file || ALLOWED_COVER_TYPES.includes(file.type))
-    .test('cover-size', 'A imagem deve ter no máximo 5MB', file => !file || file.size <= MAX_COVER_SIZE),
+    .test('cover-type', 'Escolha uma imagem .jpg ou .png', file => !(file instanceof File) || ALLOWED_COVER_TYPES.includes(file.type))
+    .test('cover-size', 'A imagem deve ter no máximo 5MB', file => !(file instanceof File) || file.size <= MAX_COVER_SIZE),
 })
 
 export type ProjectFormValues = yup.InferType<typeof projectFormSchema>
