@@ -6,3 +6,18 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Project {
+  id             String   @id @default(uuid())
+  name           String
+  client         String
+  startDate      DateTime @map("start_date") @db.Date
+  endDate        DateTime @map("end_date") @db.Date
+  coverImage     Bytes?   @map("cover_image")
+  coverImageType String?  @map("cover_image_type")
+  isFavorite     Boolean  @default(false) @map("is_favorite")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("projects")
+}
