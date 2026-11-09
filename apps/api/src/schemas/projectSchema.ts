@@ -34,3 +34,9 @@ export const createProjectSchema = yup.object({
 })
 
 export type CreateProjectInput = yup.InferType<typeof createProjectSchema>
+
+export const favoriteSchema = yup.object({
+  isFavorite: yup.boolean().required('Informe se o projeto é favorito'),
+})
+
+export type FavoriteInput = yup.InferType<typeof favoriteSchema>
