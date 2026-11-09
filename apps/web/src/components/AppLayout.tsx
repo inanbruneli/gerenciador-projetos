@@ -13,7 +13,7 @@ export default function AppLayout() {
   return <div className="flex h-dvh flex-col">
     <Header showSearch={showSearch} />
 
-    <div className="min-h-0 flex-1 overflow-y-auto">
+    <div className="relative min-h-0 flex-1 overflow-y-auto">
       <Outlet />
     </div>
 
