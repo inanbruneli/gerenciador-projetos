@@ -4,7 +4,7 @@ import PlusCircleIcon from '../icons/PlusCircleIcon'
 import SortSelect, { type SortOption } from './SortSelect'
 
 type ProjectsToolbarProps = {
-  total: number
+  total?: number
   onlyFavorites: boolean
   onOnlyFavoritesChange: (value: boolean) => void
   sort: SortOption
@@ -15,7 +15,9 @@ export default function ProjectsToolbar({ total, onlyFavorites, onOnlyFavoritesC
   return <div className="flex flex-wrap items-center justify-between gap-6">
     <h1 className="flex items-baseline gap-2 text-2xl font-semibold text-title">
       Projetos
-      <span className="text-base font-normal text-primary">({total})</span>
+      {total !== undefined &&
+        <span className="text-base font-normal text-primary">({total})</span>
+      }
     </h1>
 
     <div className="flex flex-wrap items-center gap-8">
