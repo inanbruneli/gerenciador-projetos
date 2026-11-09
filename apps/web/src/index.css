@@ -11,6 +11,9 @@
   --color-title: #1f1283;
   --color-text: #717171;
   --color-line: #dcdcdc;
+  --color-divider: #ececec;
+  --color-favorite: #ffb23d;
+  --color-switch-off: #53525d;
   --color-error: #c40000;
   --color-error-strong: #9f0000;
 }

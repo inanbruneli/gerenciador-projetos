@@ -14,6 +14,17 @@ export function formatDate(date: Date) {
   return date.toLocaleDateString('pt-BR')
 }
 
+const longDateFormat = new Intl.DateTimeFormat('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+})
+
+export function formatLongDate(isoDate: string) {
+  return longDateFormat.format(new Date(isoDate))
+}
+
 export function maskDate(value: string) {
   const digits = value.replace(/\D/g, '').slice(0, 8)
   return [digits.slice(0, 2), digits.slice(2, 4), digits.slice(4)].filter(Boolean).join('/')

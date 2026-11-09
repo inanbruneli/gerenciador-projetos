@@ -4,7 +4,7 @@ export type Project = {
   client: string
   startDate: string
   endDate: string
-  coverImageType: string | null
+  coverImageUrl: string | null
   isFavorite: boolean
   createdAt: string
   updatedAt: string
