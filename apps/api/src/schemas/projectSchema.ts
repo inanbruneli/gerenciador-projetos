@@ -6,7 +6,7 @@ const COVER_PATTERN = /^data:image\/(png|jpeg);base64,/
 const MAX_COVER_SIZE = 5 * 1024 * 1024
 const base64Size = (dataUrl: string) => Math.floor((dataUrl.length - dataUrl.indexOf(',') - 1) * 3 / 4)
 
-export const createProjectSchema = yup.object({
+export const projectSchema = yup.object({
   name: yup
     .string()
     .trim()
@@ -33,7 +33,7 @@ export const createProjectSchema = yup.object({
     .test('cover-size', 'A capa deve ter no máximo 5MB', value => !value || base64Size(value) <= MAX_COVER_SIZE),
 })
 
-export type CreateProjectInput = yup.InferType<typeof createProjectSchema>
+export type ProjectInput = yup.InferType<typeof projectSchema>
 
 export const favoriteSchema = yup.object({
   isFavorite: yup.boolean().required('Informe se o projeto é favorito'),

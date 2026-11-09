@@ -1,6 +1,6 @@
 import { prisma } from '../lib/prisma.js'
 import type { Project } from '../generated/prisma/client.js'
-import type { CreateProjectInput, FavoriteInput } from '../schemas/projectSchema.js'
+import type { FavoriteInput, ProjectInput } from '../schemas/projectSchema.js'
 
 const fromDataUrl = (dataUrl?: string | null) => {
   if (!dataUrl) return { coverImage: null, coverImageType: null }
@@ -27,8 +27,16 @@ export const listProjects = async () => {
   return projects.map(toResponse)
 }
 
-export const createProject = async ({ coverImage, ...data }: CreateProjectInput) => {
+export const createProject = async ({ coverImage, ...data }: ProjectInput) => {
   const project = await prisma.project.create({
+    data: { ...data, ...fromDataUrl(coverImage) },
+  })
+  return toResponse(project)
+}
+
+export const updateProject = async (id: string, { coverImage, ...data }: ProjectInput) => {
+  const project = await prisma.project.update({
+    where: { id },
     data: { ...data, ...fromDataUrl(coverImage) },
   })
   return toResponse(project)

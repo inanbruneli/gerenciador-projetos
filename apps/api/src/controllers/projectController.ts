@@ -11,6 +11,11 @@ export const create: RequestHandler = async (req, res) => {
   res.status(201).json(project)
 }
 
+export const update: RequestHandler<{ id: string }> = async (req, res) => {
+  const project = await projectService.updateProject(req.params.id, req.body)
+  res.json(project)
+}
+
 export const favorite: RequestHandler<{ id: string }> = async (req, res) => {
   const project = await projectService.setFavorite(req.params.id, req.body)
   res.json(project)
