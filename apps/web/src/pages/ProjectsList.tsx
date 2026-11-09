@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import EmptyProjects from '../components/EmptyProjects'
-import ProjectCard from '../components/projects/ProjectCard'
+import ProjectGrid from '../components/projects/ProjectGrid'
 import ProjectsToolbar from '../components/projects/ProjectsToolbar'
 import ProjectGridSkeleton from '../components/skeleton/ProjectGridSkeleton'
 import type { SortOption } from '../components/projects/SortSelect'
@@ -44,11 +44,7 @@ export default function ProjectsList() {
     {isPending ?
       <ProjectGridSkeleton className="mt-[22px]" />
     : visibleProjects.length ?
-      <ul className="mt-[22px] grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-8">
-        {visibleProjects.map(project => <li key={project.id}>
-          <ProjectCard project={project} />
-        </li>)}
-      </ul>
+      <ProjectGrid projects={visibleProjects} className="mt-[22px]" />
     :
       <p className="mt-16 text-center text-base text-text">Nenhum projeto favorito ainda.</p>
     }

@@ -8,13 +8,15 @@ import ImagePlaceholderIcon from '../icons/ImagePlaceholderIcon'
 import CalendarStartIcon from '../icons/CalendarStartIcon'
 import CalendarEndIcon from '../icons/CalendarEndIcon'
 import ProjectMenu from './ProjectMenu'
+import Highlight from '../search/Highlight'
 import DeleteProjectDialog from './DeleteProjectDialog'
 
 type ProjectCardProps = {
   project: Project
+  highlight?: string
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, highlight }: ProjectCardProps) {
   const toggleFavorite = useToggleFavorite()
   const deleteProject = useDeleteProject()
   const [isDeleteOpen, setIsDeleteOpen] = useState(false)
@@ -43,7 +45,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     </div>
 
     <div className="rounded-b-2xl border border-t-0 border-line bg-white px-6 pt-[22px] pb-[22px]">
-      <h2 className="truncate text-xl leading-7 font-bold text-title">{project.name}</h2>
+      <h2 className="truncate text-xl leading-7 font-bold text-title">
+        <Highlight text={project.name} query={highlight} />
+      </h2>
 
       <p className="mt-[7px] truncate text-base text-text">
         <span className="mr-2 font-bold">Cliente:</span>
