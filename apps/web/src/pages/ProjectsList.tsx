@@ -4,13 +4,24 @@ import ProjectCard from '../components/projects/ProjectCard'
 import ProjectsToolbar from '../components/projects/ProjectsToolbar'
 import type { SortOption } from '../components/projects/SortSelect'
 import { useProjects } from '../hooks/useProjects'
+import type { Project } from '../types/project'
+
+const byName = (a: Project, b: Project) => a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' })
+
+const comparators: Record<SortOption, (a: Project, b: Project) => number> = {
+  name: byName,
+  startDate: (a, b) => b.startDate.localeCompare(a.startDate) || byName(a, b),
+  endDate: (a, b) => a.endDate.localeCompare(b.endDate) || byName(a, b),
+}
 
 export default function ProjectsList() {
   const { data: projects = [], isPending } = useProjects()
   const [onlyFavorites, setOnlyFavorites] = useState(false)
   const [sort, setSort] = useState<SortOption>('name')
 
-  const visibleProjects = onlyFavorites ? projects.filter(project => project.isFavorite) : projects
+  const visibleProjects = projects
+    .filter(project => !onlyFavorites || project.isFavorite)
+    .toSorted(comparators[sort])
 
   if (isPending) return null
 
