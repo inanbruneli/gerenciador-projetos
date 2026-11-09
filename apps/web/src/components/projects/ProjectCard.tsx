@@ -1,4 +1,5 @@
 import type { Project } from '../../types/project'
+import { useToggleFavorite } from '../../hooks/useToggleFavorite'
 import { formatLongDate } from '../../utils/date'
 import StarIcon from '../icons/StarIcon'
 import DotsIcon from '../icons/DotsIcon'
@@ -11,7 +12,9 @@ type ProjectCardProps = {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  return <article className="overflow-hidden rounded-2xl">
+  const toggleFavorite = useToggleFavorite()
+
+  return <article className="overflow-hidden rounded-2xl transition-transform duration-200 motion-safe:hover:-translate-y-1">
     <div className="relative flex h-[232px] items-center justify-center bg-primary">
       {project.coverImageUrl ?
         <img src={project.coverImageUrl} alt="" className="size-full object-cover" />
@@ -24,6 +27,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           type="button"
           aria-label={project.isFavorite ? 'Desfavoritar projeto' : 'Favoritar projeto'}
           aria-pressed={project.isFavorite}
+          onClick={() => toggleFavorite.mutate({ id: project.id, isFavorite: !project.isFavorite })}
           className={`drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)] ${project.isFavorite ? 'text-favorite' : 'text-white'}`}
         >
           <StarIcon filled={project.isFavorite} />

@@ -10,6 +10,8 @@ export default function ProjectsList() {
   const [onlyFavorites, setOnlyFavorites] = useState(false)
   const [sort, setSort] = useState<SortOption>('name')
 
+  const visibleProjects = onlyFavorites ? projects.filter(project => project.isFavorite) : projects
+
   if (isPending) return null
 
   if (!projects.length) {
@@ -29,10 +31,14 @@ export default function ProjectsList() {
       onSortChange={setSort}
     />
 
-    <ul className="mt-[22px] grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-8">
-      {projects.map(project => <li key={project.id}>
-        <ProjectCard project={project} />
-      </li>)}
-    </ul>
+    {visibleProjects.length ?
+      <ul className="mt-[22px] grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-8">
+        {visibleProjects.map(project => <li key={project.id}>
+          <ProjectCard project={project} />
+        </li>)}
+      </ul>
+    :
+      <p className="mt-16 text-center text-base text-text">Nenhum projeto favorito ainda.</p>
+    }
   </main>
 }

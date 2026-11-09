@@ -40,3 +40,11 @@ export async function createProject(values: ProjectFormValues) {
     body: JSON.stringify(body),
   })
 }
+
+export function setFavorite(id: string, isFavorite: boolean) {
+  return request<Project>(`/projects/${id}/favorite`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ isFavorite }),
+  })
+}
