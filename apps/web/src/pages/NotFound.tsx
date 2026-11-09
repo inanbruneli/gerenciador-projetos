@@ -1,4 +1,4 @@
-import TransitionLink from '../components/TransitionLink'
+import { Link } from 'react-router'
 
 export default function NotFound() {
   return <main className="flex min-h-full px-[42px] py-[60px]">
@@ -11,13 +11,12 @@ export default function NotFound() {
         O endereço que você acessou não existe ou foi removido.
       </p>
 
-      <TransitionLink
+      <Link
         to="/"
-        direction="back"
         className="mt-[33px] flex h-[52px] w-[230px] items-center justify-center rounded-full bg-primary text-xl text-white"
       >
         Voltar ao início
-      </TransitionLink>
+      </Link>
     </section>
   </main>
 }

@@ -31,7 +31,7 @@ export default function DeleteProjectDialog({ projectName, isOpen, isPending, on
 
     <h2 id="delete-project-title" className="text-xl leading-7 font-bold text-title">Remover projeto</h2>
 
-    <hr className="mt-[27px] border-[#8c8b93]" />
+    <hr className="mt-[27px] border-muted" />
 
     <p className="mt-[35px] text-sm text-text">Essa ação removerá definitivamente o projeto:</p>
     <p className="mt-[15px] truncate text-2xl leading-8 text-ink">{projectName}</p>

@@ -1,15 +1,14 @@
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { toast } from 'sonner'
 import ProjectForm from '../components/projects/ProjectForm'
 import NotFound from './NotFound'
 import type { ProjectFormValues } from '../schemas/projectSchema'
 import { useProjects } from '../hooks/useProjects'
 import { useUpdateProject } from '../hooks/useUpdateProject'
-import { useTransitionNavigate } from '../hooks/useTransitionNavigate'
 
 export default function ProjectEdit() {
   const { id = '' } = useParams()
-  const navigate = useTransitionNavigate()
+  const navigate = useNavigate()
   const { data: projects, isPending } = useProjects()
   const updateProject = useUpdateProject(id)
 
@@ -30,7 +29,7 @@ export default function ProjectEdit() {
     updateProject.mutate(values, {
       onSuccess: updated => {
         toast.success('Projeto atualizado', { description: updated.name })
-        navigate('/', 'back')
+        navigate('/')
       },
       onError: error => toast.error('Não foi possível salvar o projeto', { description: error.message }),
     })

@@ -1,6 +1,6 @@
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import BackLink from '../BackLink'
+import PageHeading from '../PageHeading'
 import FormField from '../form/FormField'
 import TextInput from '../form/TextInput'
 import DatePicker from '../form/DatePicker'
@@ -11,12 +11,13 @@ import { projectFormSchema, type ProjectFormValues } from '../../schemas/project
 
 type ProjectFormProps = {
   title: string
+  animated?: boolean
   defaultValues?: ProjectFormValues
   isPending: boolean
   onSubmit: (values: ProjectFormValues) => void
 }
 
-export default function ProjectForm({ title, defaultValues = projectFormSchema.getDefault(), isPending, onSubmit }: ProjectFormProps) {
+export default function ProjectForm({ title, animated = false, defaultValues = projectFormSchema.getDefault(), isPending, onSubmit }: ProjectFormProps) {
   const { register, control, handleSubmit, getValues, trigger, formState: { errors, isValid } } = useForm<ProjectFormValues>({
     resolver: yupResolver(projectFormSchema),
     mode: 'onTouched',
@@ -26,10 +27,7 @@ export default function ProjectForm({ title, defaultValues = projectFormSchema.g
   const startDate = useWatch({ control, name: 'startDate' })
 
   return <main className="px-10 pt-[69px] pb-[60px]">
-    <div className="px-[6px]">
-      <BackLink />
-      <h1 className="mt-[10px] text-2xl font-semibold text-title">{title}</h1>
-    </div>
+    <PageHeading title={title} animated={animated} />
 
     <section className="mt-8 rounded-lg border border-line px-6 pt-[47px] pb-[51px]">
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="mx-auto flex max-w-[704px] flex-col gap-7">

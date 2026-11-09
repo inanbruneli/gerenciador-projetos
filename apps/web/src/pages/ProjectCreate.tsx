@@ -18,5 +18,5 @@ export default function ProjectCreate() {
     })
   }
 
-  return <ProjectForm title="Novo projeto" isPending={createProject.isPending} onSubmit={onSubmit} />
+  return <ProjectForm title="Novo projeto" animated isPending={createProject.isPending} onSubmit={onSubmit} />
 }
