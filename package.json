@@ -5,9 +5,9 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "trap \"kill 0\" INT TERM EXIT; yarn dev:api & yarn dev:web",
-    "dev:web": "yarn workspace web dev",
-    "dev:api": "yarn workspace api dev",
-    "build": "yarn workspaces run build"
+    "dev": "trap \"kill 0\" INT TERM EXIT; npm run dev:api & npm run dev:web",
+    "dev:web": "npm run dev -w web",
+    "dev:api": "npm run dev -w api",
+    "build": "npm run build --workspaces"
   }
 }
