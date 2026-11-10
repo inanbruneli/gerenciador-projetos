@@ -93,6 +93,14 @@ npm run dev
 
 `Ctrl+C` encerra as duas. Para rodar separadamente, use `npm run dev:web` e `npm run dev:api`.
 
+### Testes
+
+```bash
+npm test -w api
+```
+
+Os testes da API usam Jest e supertest, com o Prisma mockado, então não precisam de banco.
+
 ## API
 
 | Método | Rota | Descrição |

@@ -3,11 +3,12 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "types": ["node"],
+    "types": ["node", "jest"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["src", "prisma.config.ts"]
+  "include": ["src", "tests", "prisma.config.ts"]
 }
