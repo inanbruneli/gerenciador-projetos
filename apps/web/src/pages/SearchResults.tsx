@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router'
+import LoadError from '../components/LoadError'
 import PageHeading from '../components/PageHeading'
 import ProjectGrid from '../components/projects/ProjectGrid'
 import ProjectGridSkeleton from '../components/skeleton/ProjectGridSkeleton'
@@ -8,9 +9,11 @@ import { matchesSearch, MIN_SEARCH_LENGTH } from '../utils/search'
 export default function SearchResults() {
   const [searchParams] = useSearchParams()
   const query = (searchParams.get('q') ?? '').trim()
-  const { data: projects = [], isPending } = useProjects()
+  const { data: projects = [], isPending, isError, isFetching, refetch } = useProjects()
 
   const results = projects.filter(project => matchesSearch(project.name, query))
+
+  if (isError) return <LoadError onRetry={refetch} isRetrying={isFetching} />
 
   return <main className="px-4 pt-8 pb-[60px] sm:px-10 sm:pt-[69px]">
     <PageHeading title="Resultado da busca" />

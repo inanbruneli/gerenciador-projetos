@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import EmptyState from '../components/EmptyState'
+import LoadError from '../components/LoadError'
 import NewProjectButton from '../components/projects/NewProjectButton'
 import ProjectGrid from '../components/projects/ProjectGrid'
 import ProjectsToolbar from '../components/projects/ProjectsToolbar'
@@ -17,13 +18,15 @@ const comparators: Record<SortOption, (a: Project, b: Project) => number> = {
 }
 
 export default function ProjectsList() {
-  const { data: projects = [], isPending } = useProjects()
+  const { data: projects = [], isPending, isError, isFetching, refetch } = useProjects()
   const [onlyFavorites, setOnlyFavorites] = useState(false)
   const [sort, setSort] = useState<SortOption>('name')
 
   const visibleProjects = projects
     .filter(project => !onlyFavorites || project.isFavorite)
     .toSorted(comparators[sort])
+
+  if (isError) return <LoadError onRetry={refetch} isRetrying={isFetching} />
 
   if (!isPending && !projects.length) {
     return <EmptyState

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router'
 import { toast } from 'sonner'
 import ProjectForm from '../components/projects/ProjectForm'
+import LoadError from '../components/LoadError'
 import NotFound from './NotFound'
 import type { ProjectFormValues } from '../schemas/projectSchema'
 import { useProjects } from '../hooks/useProjects'
@@ -10,10 +11,11 @@ import { useTransitionNavigate } from '../hooks/useTransitionNavigate'
 export default function ProjectEdit() {
   const { id = '' } = useParams()
   const navigate = useTransitionNavigate()
-  const { data: projects, isPending } = useProjects()
+  const { data: projects, isPending, isError, isFetching, refetch } = useProjects()
   const updateProject = useUpdateProject(id)
 
   if (isPending) return null
+  if (isError) return <LoadError onRetry={refetch} isRetrying={isFetching} />
 
   const project = projects?.find(item => item.id === id)
   if (!project) return <NotFound />
