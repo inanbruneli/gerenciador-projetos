@@ -3,7 +3,7 @@ import { useDismiss } from '../../hooks/useDismiss'
 import DotsIcon from '../icons/DotsIcon'
 import EditIcon from '../icons/EditIcon'
 import TrashIcon from '../icons/TrashIcon'
-import { Link } from 'react-router'
+import TransitionLink from '../TransitionLink'
 
 type ProjectMenuProps = {
   projectId: string
@@ -39,10 +39,10 @@ export default function ProjectMenu({ projectId, onRemove }: ProjectMenuProps) {
       <div role="menu" className="absolute top-full right-0 z-20 mt-2 w-60 rounded bg-white shadow-[0_4px_8px_rgba(0,0,0,0.25)]">
         <span className="absolute -top-1.5 right-[11px] size-3 rotate-45 bg-white" />
 
-        <Link to={`/project/${projectId}/edit`} role="menuitem" className={itemClassName}>
+        <TransitionLink to={`/project/${projectId}/edit`} role="menuitem" className={itemClassName}>
           <span className="flex w-[22px] justify-center"><EditIcon /></span>
           Editar
-        </Link>
+        </TransitionLink>
 
         <div className="mx-[21px] h-px bg-page" />
 
