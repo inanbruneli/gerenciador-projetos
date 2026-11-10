@@ -120,7 +120,7 @@ Como é um projeto simples, manter front e back no mesmo repositório deixa tudo
 
 | Lib | Por quê |
 |---|---|
-| **React + TypeScript** | Requisito da vaga. Tipagem evita erros e documenta o formato dos dados. |
+| **React + TypeScript** | |
 | **Vite** | Build rápido e praticamente sem configuração. |
 | **React Router** | Navegação entre listagem, busca, criação e edição. O data router permite usar View Transitions na animação entre telas. |
 | **TanStack Query** | Cuida de cache, loading, erro e atualização dos dados da API, sem `useEffect` manual em cada tela. |
