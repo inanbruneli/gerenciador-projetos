@@ -12,7 +12,7 @@ export default function SearchResults() {
 
   const results = projects.filter(project => matchesSearch(project.name, query))
 
-  return <main className="px-10 pt-[69px] pb-[60px]">
+  return <main className="px-4 pt-8 pb-[60px] sm:px-10 sm:pt-[69px]">
     <PageHeading title="Resultado da busca" />
 
     {isPending ?

@@ -46,7 +46,7 @@ export default function CoverUpload({ id, value, onChange }: CoverUploadProps) {
         </button>
       </div>
     :
-      <div className="flex flex-col items-center border border-dashed border-text pt-[23px] pb-[23px] text-text">
+      <div className="flex flex-col items-center border border-dashed border-text px-4 pt-[23px] pb-[23px] text-center text-text">
         <UploadIcon />
 
         <p className="mt-[14px] text-base">Escolha uma imagem .jpg ou .png no seu dispositivo</p>

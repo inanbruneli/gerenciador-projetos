@@ -33,7 +33,7 @@ export default function Header({ showSearch = false }: HeaderProps) {
             type="button"
             aria-label="Buscar projetos"
             onClick={() => setIsSearchOpen(true)}
-            className="absolute right-[61px] text-white"
+            className="absolute right-4 text-white sm:right-[61px]"
           >
             <SearchIcon />
           </button>

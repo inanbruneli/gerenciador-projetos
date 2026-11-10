@@ -27,10 +27,10 @@ export default function ProjectForm({ title, animated = false, defaultValues = p
 
   const startDate = useWatch({ control, name: 'startDate' })
 
-  return <main className="px-10 pt-[69px] pb-[60px]">
+  return <main className="px-4 pt-8 pb-[60px] sm:px-10 sm:pt-[69px]">
     <PageHeading title={title} animated={animated} />
 
-    <section className="mt-8 rounded-lg border border-line px-6 pt-[47px] pb-[51px]">
+    <section className="mt-8 rounded-lg border border-line px-4 pt-8 pb-8 sm:px-6 sm:pt-[47px] sm:pb-[51px]">
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="mx-auto flex max-w-[704px] flex-col gap-7">
         <FormField label="Nome do projeto" htmlFor="name" required error={errors.name?.message}>
           <TextInput id="name" hasError={!!errors.name} {...register('name')} />
@@ -40,7 +40,7 @@ export default function ProjectForm({ title, animated = false, defaultValues = p
           <TextInput id="client" hasError={!!errors.client} {...register('client')} />
         </FormField>
 
-        <div className="grid grid-cols-2 gap-10">
+        <div className="grid gap-7 sm:grid-cols-2 sm:gap-10">
           <FormField label="Data de Início" htmlFor="startDate" required error={errors.startDate?.message}>
             <Controller
               name="startDate"

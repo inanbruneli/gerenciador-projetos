@@ -24,7 +24,7 @@ export default function DeleteProjectDialog({ projectName, isOpen, isPending, on
     aria-labelledby="delete-project-title"
     onCancel={onCancel}
     onClick={event => event.target === dialogRef.current && onCancel()}
-    className="m-auto w-[582px] max-w-[calc(100vw-32px)] overflow-visible rounded-lg bg-white px-8 pt-12 pb-8 text-center backdrop:bg-black/80 backdrop:backdrop-blur-[2px]"
+    className="m-auto w-[582px] max-w-[calc(100vw-32px)] overflow-visible rounded-lg bg-white px-5 pt-12 pb-8 sm:px-8 text-center backdrop:bg-black/80 backdrop:backdrop-blur-[2px]"
   >
     <span className="absolute top-0 left-1/2 flex size-16 -translate-1/2 items-center justify-center rounded-full bg-primary text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
       <TrashIcon size={18} />
@@ -37,8 +37,8 @@ export default function DeleteProjectDialog({ projectName, isOpen, isPending, on
     <p className="mt-[35px] text-sm text-text">Essa ação removerá definitivamente o projeto:</p>
     <p className="mt-[15px] truncate text-2xl leading-8 text-ink">{projectName}</p>
 
-    <div className="mt-8 flex gap-8">
-      <Button variant="outline" onClick={onCancel} className="w-[226px]">
+    <div className="mt-8 flex gap-4 sm:gap-8">
+      <Button variant="outline" onClick={onCancel} className="flex-1 sm:w-[226px] sm:flex-none">
         Cancelar
       </Button>
 

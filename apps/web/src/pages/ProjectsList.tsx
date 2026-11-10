@@ -33,7 +33,7 @@ export default function ProjectsList() {
     />
   }
 
-  return <main className="px-10 pt-[60px] pb-[60px]">
+  return <main className="px-4 pt-8 pb-[60px] sm:px-10 sm:pt-[60px]">
     <ProjectsToolbar
       total={isPending ? undefined : projects.length}
       onlyFavorites={onlyFavorites}
