@@ -1,4 +1,5 @@
 import Skeleton from './Skeleton'
+import ProjectGridLayout from '../projects/ProjectGridLayout'
 
 type ProjectGridSkeletonProps = {
   count?: number
@@ -6,7 +7,7 @@ type ProjectGridSkeletonProps = {
 }
 
 export default function ProjectGridSkeleton({ count = 10, className = '' }: ProjectGridSkeletonProps) {
-  return <ul aria-busy="true" aria-label="Carregando projetos" className={`grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-8 ${className}`}>
+  return <ProjectGridLayout aria-busy="true" aria-label="Carregando projetos" className={className}>
     {Array.from({ length: count }, (_, index) => <li key={index} className="overflow-hidden rounded-2xl border border-line bg-white">
       <Skeleton className="h-[232px] rounded-none" />
 
@@ -18,5 +19,5 @@ export default function ProjectGridSkeleton({ count = 10, className = '' }: Proj
         <Skeleton className="mt-4 h-6 w-4/5" />
       </div>
     </li>)}
-  </ul>
+  </ProjectGridLayout>
 }

@@ -1,5 +1,6 @@
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import Button from '../Button'
 import PageHeading from '../PageHeading'
 import FormField from '../form/FormField'
 import TextInput from '../form/TextInput'
@@ -83,13 +84,9 @@ export default function ProjectForm({ title, animated = false, defaultValues = p
           />
         </FormField>
 
-        <button
-          type="submit"
-          disabled={!isValid || isPending}
-          className="mt-[5px] h-[52px] w-full rounded-full bg-primary text-xl text-white disabled:bg-primary-disabled"
-        >
+        <Button type="submit" disabled={!isValid || isPending} className="mt-[5px] w-full">
           {isPending ? 'Salvando...' : 'Salvar projeto'}
-        </button>
+        </Button>
       </form>
     </section>
   </main>

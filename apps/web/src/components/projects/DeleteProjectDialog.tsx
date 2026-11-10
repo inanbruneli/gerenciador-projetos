@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import Button from '../Button'
 import TrashIcon from '../icons/TrashIcon'
 
 type DeleteProjectDialogProps = {
@@ -37,22 +38,13 @@ export default function DeleteProjectDialog({ projectName, isOpen, isPending, on
     <p className="mt-[15px] truncate text-2xl leading-8 text-ink">{projectName}</p>
 
     <div className="mt-8 flex gap-8">
-      <button
-        type="button"
-        onClick={onCancel}
-        className="h-[52px] w-[226px] rounded-full border border-primary text-xl text-primary"
-      >
+      <Button variant="outline" onClick={onCancel} className="w-[226px]">
         Cancelar
-      </button>
+      </Button>
 
-      <button
-        type="button"
-        onClick={onConfirm}
-        disabled={isPending}
-        className="h-[52px] flex-1 rounded-full bg-primary text-xl text-white disabled:bg-primary-disabled"
-      >
+      <Button onClick={onConfirm} disabled={isPending} className="flex-1">
         {isPending ? 'Removendo...' : 'Confirmar'}
-      </button>
+      </Button>
     </div>
   </dialog>
 }

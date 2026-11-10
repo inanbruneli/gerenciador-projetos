@@ -1,6 +1,5 @@
 import Switch from '../Switch'
-import TransitionLink from '../TransitionLink'
-import PlusCircleIcon from '../icons/PlusCircleIcon'
+import NewProjectButton from './NewProjectButton'
 import SortSelect, { type SortOption } from './SortSelect'
 
 type ProjectsToolbarProps = {
@@ -25,15 +24,7 @@ export default function ProjectsToolbar({ total, onlyFavorites, onOnlyFavoritesC
 
       <SortSelect value={sort} onChange={onSortChange} />
 
-      <TransitionLink
-        to="/project/new"
-        className="flex h-10 w-[184px] items-center justify-center gap-3 rounded-full bg-primary text-base text-white"
-      >
-        <span className="opacity-90">
-          <PlusCircleIcon />
-        </span>
-        Novo projeto
-      </TransitionLink>
+      <NewProjectButton />
     </div>
   </div>
 }

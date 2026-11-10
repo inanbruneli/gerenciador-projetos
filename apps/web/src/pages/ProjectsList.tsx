@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import EmptyProjects from '../components/EmptyProjects'
+import EmptyState from '../components/EmptyState'
+import NewProjectButton from '../components/projects/NewProjectButton'
 import ProjectGrid from '../components/projects/ProjectGrid'
 import ProjectsToolbar from '../components/projects/ProjectsToolbar'
 import ProjectGridSkeleton from '../components/skeleton/ProjectGridSkeleton'
@@ -25,11 +26,11 @@ export default function ProjectsList() {
     .toSorted(comparators[sort])
 
   if (!isPending && !projects.length) {
-    return <main className="flex min-h-full px-[42px] py-[60px]">
-      <section className="flex flex-1 items-center justify-center bg-white pb-1">
-        <EmptyProjects />
-      </section>
-    </main>
+    return <EmptyState
+      title="Nenhum projeto"
+      description="Clique no botão abaixo para criar o primeiro e gerenciá-lo."
+      action={<NewProjectButton size="lg" />}
+    />
   }
 
   return <main className="px-10 pt-[60px] pb-[60px]">

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
+import Button from '../Button'
 import TrashIcon from '../icons/TrashIcon'
 import UploadIcon from '../icons/UploadIcon'
 
@@ -50,13 +51,9 @@ export default function CoverUpload({ id, value, onChange }: CoverUploadProps) {
 
         <p className="mt-[14px] text-base">Escolha uma imagem .jpg ou .png no seu dispositivo</p>
 
-        <button
-          type="button"
-          onClick={() => inputRef.current?.click()}
-          className="mt-6 h-10 w-36 rounded-full border border-primary bg-white text-base text-primary"
-        >
+        <Button variant="outline" size="md" onClick={() => inputRef.current?.click()} className="mt-6 w-36">
           Selecionar
-        </button>
+        </Button>
       </div>
     }
   </>

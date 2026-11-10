@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState, type FocusEvent, type ReactNode } from 'react'
+import { useRef, useState, type FocusEvent, type ReactNode } from 'react'
 import { DayPicker } from 'react-day-picker'
 import { ptBR } from 'react-day-picker/locale/pt-BR'
 import TextInput from './TextInput'
+import { useDismiss } from '../../hooks/useDismiss'
 import { formatDate, maskDate, parseDisplayDate, parseIsoDate, toIsoDate } from '../../utils/date'
 
 const calendarClassNames = {
@@ -53,29 +54,7 @@ export default function DatePicker({ id, value, onChange, onBlur, icon, minDate,
     onBlur()
   }
 
-  useEffect(() => {
-    if (!isOpen) return
-
-    const handleClick = (event: MouseEvent) => {
-      if (!containerRef.current?.contains(event.target as Node)) {
-        setIsOpen(false)
-        onBlur()
-      }
-    }
-    const handleKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false)
-        onBlur()
-      }
-    }
-
-    document.addEventListener('mousedown', handleClick)
-    document.addEventListener('keydown', handleKey)
-    return () => {
-      document.removeEventListener('mousedown', handleClick)
-      document.removeEventListener('keydown', handleKey)
-    }
-  }, [isOpen, onBlur])
+  useDismiss(containerRef, isOpen, close)
 
   const handleType = (input: string) => {
     const masked = maskDate(input)

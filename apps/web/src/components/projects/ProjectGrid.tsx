@@ -1,5 +1,6 @@
 import type { Project } from '../../types/project'
 import ProjectCard from './ProjectCard'
+import ProjectGridLayout from './ProjectGridLayout'
 
 type ProjectGridProps = {
   projects: Project[]
@@ -8,9 +9,9 @@ type ProjectGridProps = {
 }
 
 export default function ProjectGrid({ projects, highlight, className = '' }: ProjectGridProps) {
-  return <ul className={`grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-8 ${className}`}>
+  return <ProjectGridLayout className={className}>
     {projects.map(project => <li key={project.id}>
       <ProjectCard project={project} highlight={highlight} />
     </li>)}
-  </ul>
+  </ProjectGridLayout>
 }
