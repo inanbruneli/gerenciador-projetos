@@ -8,6 +8,7 @@
     "dev": "trap \"kill 0\" INT TERM EXIT; npm run dev:api & npm run dev:web",
     "dev:web": "npm run dev -w web",
     "dev:api": "npm run dev -w api",
-    "build": "npm run build --workspaces"
+    "build": "npm run build --workspaces",
+    "test": "npm test --workspaces"
   }
 }

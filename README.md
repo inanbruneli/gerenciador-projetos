@@ -96,10 +96,13 @@ npm run dev
 ### Testes
 
 ```bash
-npm test -w api
+npm test
 ```
 
-Os testes da API usam Jest e supertest, com o Prisma mockado, então não precisam de banco.
+Roda os testes dos dois apps. Para rodar só um, use `npm test -w api` ou `npm test -w web`.
+
+- **API:** Jest e supertest, testando as rotas com o Prisma mockado, sem precisar de banco.
+- **Web:** Vitest, testando a validação do formulário, a busca e o tratamento de datas.
 
 ## API
 
