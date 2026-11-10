@@ -134,7 +134,7 @@ Como é um projeto simples, manter front e back no mesmo repositório deixa tudo
 
 | Lib | Por quê |
 |---|---|
-| **Node.js + TypeScript** | Requisito da vaga. Mesma linguagem do front. |
+| **Node.js + TypeScript** |  |
 | **Express** | Simples e suficiente para uma API REST pequena. |
 | **yup** | Validação do corpo das requisições, com as mesmas regras do formulário. |
 | **Prisma** | ORM tipado, com migrations versionadas e schema fácil de ler. |
